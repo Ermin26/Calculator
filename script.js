@@ -28,7 +28,7 @@ keys.addEventListener('click', e => {
     const keyContent = key.textContent;
     const displayedNum = display.textContent;
     const actions = ['add', 'subtract', 'multiply', 'divide']
-    console.log(key)
+    console.log(parseFloat(2,5) + parseFloat(1))
     Array.from(key.parentNode.children)
       .forEach(k => k.classList.remove('is-depressed'));
     if(!action){
@@ -50,10 +50,10 @@ keys.addEventListener('click', e => {
       }
 
     if (action === 'decimal') {
-      if(displayedNum.includes(',')){
+      if(displayedNum.includes('.')){
 
         }else{
-            display.textContent = displayedNum + ','
+            display.textContent = displayedNum + '.'
         }
     }
 

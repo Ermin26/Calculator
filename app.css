@@ -79,8 +79,8 @@ svg{
 @media screen and (max-width: 550px){
     .calculator{
         transform: translateY(0%);
-        height: 100vh;
-        width: 100vw;
+        height: 100dvh;
+        width: 100dvw;
     }
     .display{
         height: 50%;
