@@ -16,7 +16,7 @@ const calculate = (n1, operator, n2) => {
     } else if (operator === 'divide') {
       result = a / b
     }else if (operator === 'percent') {
-        result = a / 100
+        result = a / 100;
       }
     
     return result
@@ -55,10 +55,10 @@ keys.addEventListener('click', e => {
           calculator.dataset.firstValue = displayedNum;
           calculator.dataset.operator = action;
         }
-        
+
       }else if(action === 'percent'){
         display.textContent = parseFloat(displayedNum / 100);
-        calculator.dataset.previouskeytype = 'operator';
+        calculator.removeAttribute('data-operator');
       }
 
     if (action === 'decimal') {
@@ -81,6 +81,9 @@ keys.addEventListener('click', e => {
     }
 
     if (action === 'equal') {
+      if(!calculator.dataset.firstValue){
+
+      }else{
         const firstValue = calculator.dataset.firstValue;
         const operator = calculator.dataset.operator;
         const secondValue = displayedNum;
@@ -88,7 +91,9 @@ keys.addEventListener('click', e => {
         display.textContent = calculate(firstValue, operator, secondValue);
         calculator.removeAttribute('data-operator')
         calculator.removeAttribute('data-first-value')
+        calculator.removeAttribute('data-previouskeytype')
 
       }
     }
+  }
 })
