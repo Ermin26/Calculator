@@ -9,7 +9,7 @@ const calculate = (n1, operator, n2) => {
     let b = parseFloat(n2);
     if (operator === 'add') {
       result = a + b
-    } else if (operator === 'subtract') {
+    } else if (operator === 'subtraction') {
       result = a - b
     } else if (operator === 'multiply') {
       result = a * b
@@ -27,23 +27,35 @@ keys.addEventListener('click', e => {
     const action = key.dataset.action;
     const keyContent = key.textContent;
     const displayedNum = display.textContent;
-    const actions = ['add', 'subtract', 'multiply', 'divide']
-    console.log(parseFloat(2,5) + parseFloat(1))
+    const actions = ['add', 'subtraction', 'multiply', 'divide']
     Array.from(key.parentNode.children)
       .forEach(k => k.classList.remove('is-depressed'));
     if(!action){
         if(display.textContent === '0' || calculator.dataset.previouskeytype === 'operator'){
             display.textContent = keyContent;
-            calculator.removeAttribute('data-previouskeytype');
         }else{
             display.textContent = displayedNum + keyContent;
         }
     }
     if (actions.includes(action)) {
         key.classList.add('is-depressed');
-        calculator.dataset.previouskeytype = 'operator';
-        calculator.dataset.firstValue = displayedNum;
-        calculator.dataset.operator = action;
+        if(calculator.dataset.firstValue){
+          let firstValue = calculator.dataset.firstValue;
+          const operator = calculator.dataset.operator;
+          const secondValue = displayedNum;
+          calculator.dataset.previouskeytype = 'operator';
+
+          display.textContent = calculate(firstValue, operator, secondValue);
+          let resultAfter = calculate(firstValue, operator, secondValue);
+          console.log(action)
+          calculator.dataset.firstValue = resultAfter;
+          calculator.dataset.operator = action;
+        }else{
+          calculator.dataset.previouskeytype = 'operator';
+          calculator.dataset.firstValue = displayedNum;
+          calculator.dataset.operator = action;
+        }
+        
       }else if(action === 'percent'){
         display.textContent = parseFloat(displayedNum / 100);
         calculator.dataset.previouskeytype = 'operator';
@@ -63,6 +75,9 @@ keys.addEventListener('click', e => {
 
     if (action === 'clear') {
         display.textContent = '0';
+        calculator.removeAttribute('data-previouskeytype')
+        calculator.removeAttribute('data-first-value')
+        calculator.removeAttribute('data-operator')
     }
 
     if (action === 'equal') {
@@ -70,8 +85,10 @@ keys.addEventListener('click', e => {
         const operator = calculator.dataset.operator;
         const secondValue = displayedNum;
         calculator.dataset.previouskeytype = 'operator';
-
         display.textContent = calculate(firstValue, operator, secondValue);
+        calculator.removeAttribute('data-operator')
+        calculator.removeAttribute('data-first-value')
+
       }
     }
 })
