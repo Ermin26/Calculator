@@ -28,6 +28,8 @@ body{
     align-items: end;
     font-size: 2em;
     padding: 2px;
+    border: 1px solid black;
+    box-shadow: inset 0 0px 100px 10px white;
 }
 
 .numbers{
@@ -91,15 +93,20 @@ svg{
         align-items: baseline;
     }
     .numbers button{
-        height: 50px;
-        width: 50px;
+        height: 80px;
+        width: 80px;
+        font-size: 2em;
     }
     .numbers button:last-child{
         width: auto;
-        height: 50px;
+        height: 80px;
         border-radius: 10px;
         grid-column: span 2;
         background-color: rgb(214, 145, 16);
         color: snow;
+    }
+    svg{
+        height: 26px;
+        width: 26px;
     }
 }
