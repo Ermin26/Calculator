@@ -33,6 +33,7 @@ keys.addEventListener('click', e => {
     if(!action){
         if(display.textContent === '0' || calculator.dataset.previouskeytype === 'operator'){
             display.textContent = keyContent;
+            calculator.removeAttribute('data-previouskeytype')
         }else{
             display.textContent = displayedNum + keyContent;
         }
